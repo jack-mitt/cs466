@@ -28,11 +28,10 @@ int main(int argc, char* argv[]){
       }
       mask >>= 1;
     }
-    printf("\n");
   }
 
-  printf("Ones: %d \n", one_count);
-  printf("Zeros: %d \n", zero_count);
+  printf("O: %d \n", one_count);
+  printf("1: %d \n", zero_count);
   fclose(fptr);
   return 0;
 }
