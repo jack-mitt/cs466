@@ -1,24 +1,28 @@
 #include <stdio.h>
 #include <stdint.h>
-int xor_bit(int a, int b){
+#include <stdbool.h>
+bool xor_bit(bool a, bool b){
   //xor 2 bits without using ^
-  int and_1 = (a && !b);
-  int and_2 = (!a && b);
-  int xor = and_1 || and_2;
-  //printf("%d \n", xor);
+  bool and_1 = (a && !b);
+  bool and_2 = (!a && b);
+  bool xor = and_1 || and_2;
   return xor;
 }
 
 uint32_t xor_word(uint32_t a, uint32_t b){
   //xor two words, cakk xor_bit for every bit
   int c_bit = 0;
+  bool xor_check;
   int byte;
   int mask;
   uint32_t c = 0x0;
   while(c_bit < 32){
-    //printf("%01X ", (int)a & 1);
-    //printf("%01X \n", (int)b & 1);
-    byte = xor_bit((int)a & 1,(int) b & 1);
+    xor_check = xor_bit(a & 1, b & 1);
+    if(xor_check){
+      byte = 1;
+    } else {
+      byte = 0;
+    }
     mask = 1 << c_bit;
     c = c << (c & ~mask) | ((byte << c_bit) & mask);
     c_bit++;
